@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace ProyectoFinal
 {
-    internal class ClassNodo
+    internal class ClassNodoEstadio
     {
         public string Zona { get; set; }
         public int Capacidad { get; set; }
         public int Tickets { get; set; }
-        public ClassNodo? Siguiente { get; set; } //mueve el puntero a la otra lista
+        public ClassNodoEstadio? Siguiente { get; set; } //mueve el puntero a la otra lista
 
-        public ClassNodo(string zona, int capacidad, int tickets)
+        public ClassNodoEstadio(string zona, int capacidad, int tickets)
         {
             Zona = zona;
             Capacidad = capacidad;

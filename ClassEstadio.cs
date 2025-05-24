@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 namespace ProyectoFinal
 {
     internal class ClassEstadio
-    {
+    {  
+        public ClassNodoEstadio? Inicio { get; set; }
         public int TotalNodos { get; set; }
-        public ClassNodo? Inicio { get; set; }
 
         public ClassEstadio()
         {
@@ -17,9 +17,10 @@ namespace ProyectoFinal
             TotalNodos = 0;
         }
 
-        public void AgregarInicio(string zona, int capacidad, int tickets)
+        // Agrega una nueva zona al inicio de la lista
+        public void AgregarZona(string zona, int capacidad, int tickets)
         {
-            ClassNodo nuevo = new ClassNodo(zona, capacidad, tickets);
+            ClassNodoEstadio nuevo = new ClassNodoEstadio(zona, capacidad, tickets);
             nuevo.Siguiente = Inicio;
             Inicio = nuevo;
             TotalNodos++;
@@ -27,23 +28,68 @@ namespace ProyectoFinal
 
         public string Mostrar()
         {
-            StringBuilder lista = new StringBuilder();
-            if (Inicio != null)
+            if (Inicio == null)
+                return "No existen zonas registradas.";
+
+            StringBuilder sb = new StringBuilder();
+            ClassNodoEstadio? actual = Inicio;
+
+            while (actual != null)
             {
-                ClassNodo auxiliar = Inicio;
-
-                while (auxiliar != null)
-                {
-                    lista.AppendLine($"Zona: {auxiliar.Zona}, Capacidad: {auxiliar.Capacidad}, Tickets disponibles: {auxiliar.Tickets}");
-                    auxiliar = auxiliar.Siguiente;
-                }
-
-                return lista.ToString();
+                sb.AppendLine($"Zona: {actual.Zona}, Capacidad: {actual.Capacidad}, Tickets disponibles: {actual.Tickets}");
+                actual = actual.Siguiente;
             }
-            else
+
+            return sb.ToString();
+        }
+
+        public bool VerificarDisponibilidad(string zona, int cantidadSolicitada)
+        {
+            ClassNodoEstadio? actual = Inicio;
+            while (actual != null)
             {
-                lista.Append("No existen datos");
-                return lista.ToString();
+                if (actual.Zona == zona)
+                {
+                    return actual.Tickets >= cantidadSolicitada;
+                }
+                actual = actual.Siguiente;
+            }
+            return false;
+        }
+
+        public bool AsignarTickets(string zona, int cantidad)
+        {
+            ClassNodoEstadio? actual = Inicio;
+            while (actual != null)
+            {
+                if (actual.Zona == zona)
+                {
+                    if (actual.Tickets >= cantidad)
+                    {
+                        actual.Tickets -= cantidad;
+                        return true;
+                    }
+                    else
+                    {
+                        return false; 
+                    }
+                }
+                actual = actual.Siguiente;
+            }
+            return false; 
+        }
+
+        public void ReintegrarTickets(string zona, int cantidad)
+        {
+            ClassNodoEstadio? actual = Inicio;
+            while (actual != null)
+            {
+                if (actual.Zona == zona)
+                {
+                    actual.Tickets += cantidad;
+                    return;
+                }
+                actual = actual.Siguiente;
             }
         }
 

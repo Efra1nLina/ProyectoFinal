@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace ProyectoFinal
 {
-    internal class Orden
+    internal class ClassOrden
     {
         
-        private Usuario? frente;
-        private Usuario? final;
+        private ClassNodoOrden? frente;
+        private ClassNodoOrden? final;
 
-        public Orden()
+        public ClassOrden()
         {
             frente = null;
             final = null;
@@ -20,12 +20,12 @@ namespace ProyectoFinal
 
         public bool EstaVacia()
         {
-            return frente == null;
+            return frente == null; //clase para verificar si esta vacia en otras clases
         }
 
-        public void Encolar(string nombre, string zona)
+        public void Insertar(string nombre, string zona)
         {
-            Usuario nuevo = new Usuario(nombre, zona);
+            ClassNodoOrden nuevo = new ClassNodoOrden(nombre, zona);
 
             if (EstaVacia())
             {
@@ -39,14 +39,21 @@ namespace ProyectoFinal
             }
         }
 
-        public Usuario? Desencolar()
+        public ClassNodoOrden? Desencolar()
         {
-            if (EstaVacia()) return null;
+            if (EstaVacia())
+            {
+                MessageBox.Show("No existen clientes");
+                return null;
+            }
 
-            Usuario eliminado = frente!;
-            frente = frente!.Siguiente;
+            ClassNodoOrden eliminado = frente!; //el ! le indica al compilador que frente no es null en este punto (porque ya lo verificaste antes)
+            frente = frente!.Siguiente; //si no habia más nodos, frente sera null
 
-            if (frente == null) final = null;
+            if (frente == null)
+            {
+                final = null;
+            }
 
             return eliminado;
         }
@@ -56,7 +63,7 @@ namespace ProyectoFinal
             if (EstaVacia()) return "Cola vacía.";
 
             StringBuilder lista = new StringBuilder();
-            Usuario? aux = frente;
+            ClassNodoOrden? aux = frente;
 
             while (aux != null)
             {

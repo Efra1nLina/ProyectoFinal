@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace ProyectoFinal
 {
-    internal class Usuario
+    internal class ClassNodoOrden
     {
         public string Nombre { get; set; }
         public string ZonaDeseada { get; set; }
-        public Usuario? Siguiente { get; set; }
+        public ClassNodoOrden? Siguiente { get; set; }
 
-        public Usuario(string nombre, string zona)
+        public ClassNodoOrden(string nombre, string zona)
         {
             Nombre = nombre;
             ZonaDeseada = zona;
