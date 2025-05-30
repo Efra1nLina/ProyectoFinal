@@ -30,6 +30,7 @@
         {
             elegirZona = new ComboBox();
             label1 = new Label();
+            label2 = new Label();
             SuspendLayout();
             // 
             // elegirZona
@@ -50,11 +51,21 @@
             label1.TabIndex = 1;
             label1.Text = "Zona:";
             // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(339, 191);
+            label2.Name = "label2";
+            label2.Size = new Size(86, 15);
+            label2.TabIndex = 2;
+            label2.Text = "ola? ya da o no";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(elegirZona);
             Name = "Form1";
@@ -67,5 +78,6 @@
 
         private ComboBox elegirZona;
         private Label label1;
+        private Label label2;
     }
 }
