@@ -26,16 +26,19 @@ namespace ProyectoFinal
             Font fuente = this.Font;
             Brush fondo = Brushes.LightGray;
 
-            g.DrawString(nombreZona, new Font(fuente.FontFamily, 10, FontStyle.Bold), Brushes.Black, inicio.X, inicio.Y - 25);
+            SizeF tamañoTexto = g.MeasureString(nombreZona, new Font(fuente.FontFamily, 10, FontStyle.Bold));
+            float textoX = (this.ClientSize.Width - tamañoTexto.Width) / 2;
+            g.DrawString(nombreZona, new Font(fuente.FontFamily, 10, FontStyle.Bold), Brushes.Black, textoX, inicio.Y - 25);
 
             for (int fila = 0; fila < filas; fila++)
             {
                 int filaGlobal = filaBase + fila;
                 int asientosEnFila = 4 + filaGlobal;
+
                 int filaY = inicio.Y + fila * (alto + paddingY);
 
                 int filaAnchoTotal = asientosEnFila * (ancho + paddingX);
-                int inicioX = inicio.X + (300 - filaAnchoTotal) / 2;
+                int inicioX = (this.ClientSize.Width - filaAnchoTotal) / 2;
 
                 for (int i = 0; i < asientosEnFila; i++)
                 {
@@ -62,19 +65,17 @@ namespace ProyectoFinal
         {
             Graphics g = e.Graphics;
 
-            int contador = 1;
             int filaBase = 0;
+            int contador = 1;
 
-            
-            contador = DibujarZona(g, "VIP", 3, filaBase, new Point(40, 40), ref contador);
+            contador = DibujarZona(g, "VIP", 2, filaBase, new Point(0, 40), ref contador);
+            filaBase += 2;
+
+            contador = DibujarZona(g, "Tribuna", 3, filaBase, new Point(0, 160), ref contador);
             filaBase += 3;
 
-            
-            contador = DibujarZona(g, "Tribuna", 4, filaBase, new Point(40, 230), ref contador);
-            filaBase += 4;
+            contador = DibujarZona(g, "General", 4, filaBase, new Point(0, 310), ref contador);
 
-            
-            contador = DibujarZona(g, "General", 5, filaBase, new Point(40, 460), ref contador);
         }
 
         private void Disponibilidad_Load(object sender, EventArgs e)
