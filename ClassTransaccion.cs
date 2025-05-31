@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using QRCoder;
 namespace ProyectoFinal
 {
     internal class ClassTransaccion
     {
         private int contadorBoletos;
-        private readonly string rutaArchivo = "transacciones.txt";
+        string carpeta = @"C:\estadio";
+        private string rutaArchivo = @"C:\estadio\transacciones.txt";
 
         public ClassTransaccion()
         {
@@ -61,10 +63,19 @@ namespace ProyectoFinal
                     }
                 }
             }
+           // string rutaQR = $@"C:\estadio\QR_{boleto.Numero}.png";
+            //QR vistaQR = new QR(rutaQR);
+            //vistaQR.Show();
+
         }
 
         private void GuardarTransaccion(ClassBoleto boleto)
         {
+            
+            if (!Directory.Exists(carpeta))
+            {
+                Directory.CreateDirectory(carpeta);
+            }
             using (StreamWriter sw = new StreamWriter(rutaArchivo, true))
             {
                 sw.WriteLine($"{boleto.Numero};{boleto.NombreComprador};{boleto.Zona};{boleto.Asiento};{boleto.FechaHoraCompra}");
@@ -73,8 +84,21 @@ namespace ProyectoFinal
 
         private void GenerarQR(ClassBoleto boleto)
         {
-            string rutaQR = $"QR_{boleto.Numero}.txt";
-            File.WriteAllText(rutaQR, $"Boleto #{boleto.Numero}\nZona: {boleto.Zona}\nAsiento: {boleto.Asiento}\nCliente: {boleto.NombreComprador}");
+            string carpeta = @"C:\estadio";
+            if (!Directory.Exists(carpeta))
+            {
+                Directory.CreateDirectory(carpeta);
+            }
+
+            string contenidoQR = $"Boleto #{boleto.Numero}\nZona: {boleto.Zona}\nAsiento: {boleto.Asiento}\nCliente: {boleto.NombreComprador}";
+            string rutaImagen = Path.Combine(carpeta, $"QR_{boleto.Numero}.png");
+
+            QRCodeGenerator qrGenerator = new QRCodeGenerator();
+            QRCodeData qrCodeData = qrGenerator.CreateQrCode(contenidoQR, QRCodeGenerator.ECCLevel.Q);
+            QRCode qrCode = new QRCode(qrCodeData);
+            Bitmap qrImage = qrCode.GetGraphic(20);
+
+            qrImage.Save(rutaImagen, ImageFormat.Png);
         }
     }
 }
