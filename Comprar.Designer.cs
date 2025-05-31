@@ -36,6 +36,8 @@
             asiento = new TextBox();
             aceptarComprar = new Button();
             comprarDeNuevo = new Button();
+            cantBoletos = new TextBox();
+            label4 = new Label();
             SuspendLayout();
             // 
             // label1
@@ -108,11 +110,29 @@
             comprarDeNuevo.Text = "Realizar otra compra";
             comprarDeNuevo.UseVisualStyleBackColor = true;
             // 
+            // cantBoletos
+            // 
+            cantBoletos.Location = new Point(266, 70);
+            cantBoletos.Name = "cantBoletos";
+            cantBoletos.Size = new Size(100, 23);
+            cantBoletos.TabIndex = 8;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(266, 33);
+            label4.Name = "label4";
+            label4.Size = new Size(113, 15);
+            label4.TabIndex = 9;
+            label4.Text = "Cantidad de boletos";
+            // 
             // Comprar
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(239, 418);
+            ClientSize = new Size(458, 408);
+            Controls.Add(label4);
+            Controls.Add(cantBoletos);
             Controls.Add(comprarDeNuevo);
             Controls.Add(aceptarComprar);
             Controls.Add(asiento);
@@ -141,5 +161,8 @@
         private ComboBox zonaElejida;
         private TextBox nombreCliente;
         private TextBox asiento;
+        private TextBox textBox3;
+        private Label label4;
+        private TextBox cantBoletos;
     }
 }

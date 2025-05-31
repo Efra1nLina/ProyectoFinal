@@ -16,9 +16,11 @@ namespace ProyectoFinal
             contadorBoletos = 1;
         }
 
-        public void ProcesarCola(ClassOrden orden, ClassEstadio estadio)
+        public void ProcesarColaConAsientos(ClassOrden orden, ClassEstadio estadio, List<int> listaAsientos)
         {
-            while (!orden.EstaVacia())
+            int indexAsiento = 0;
+
+            while (!orden.EstaVacia() && indexAsiento < listaAsientos.Count)
             {
                 ClassNodoOrden? cliente = orden.Desencolar();
 
@@ -32,24 +34,25 @@ namespace ProyectoFinal
 
                         if (asignado)
                         {
-                           ClassBoleto boleto;
+                            int asientoAsignado = listaAsientos[indexAsiento];
+                            ClassBoleto boleto;
 
                             if (cliente.ZonaDeseada == "VIP")
                             {
-                                boleto = new ClassBoletoVIP(contadorBoletos, cliente.ZonaDeseada, contadorBoletos, cliente.Nombre);
+                                boleto = new ClassBoletoVIP(contadorBoletos, cliente.ZonaDeseada, asientoAsignado, cliente.Nombre);
                             }
                             else
                             {
-                                boleto = new ClassBoleto(contadorBoletos, cliente.ZonaDeseada, contadorBoletos, cliente.Nombre);
+                                boleto = new ClassBoleto(contadorBoletos, cliente.ZonaDeseada, asientoAsignado, cliente.Nombre);
                             }
 
                             GuardarTransaccion(boleto);
-
                             GenerarQR(boleto);
 
                             MessageBox.Show("Compra realizada:\n" + boleto.ObtenerInformacion());
 
                             contadorBoletos++;
+                            indexAsiento++;
                         }
                     }
                     else

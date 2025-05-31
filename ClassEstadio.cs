@@ -50,7 +50,8 @@ namespace ProyectoFinal
             {
                 if (actual.Zona == zona)
                 {
-                    return actual.Tickets >= cantidadSolicitada;
+                    //return actual.Tickets >= cantidadSolicitada;
+                    return actual.Capacidad - actual.Tickets >= cantidadSolicitada;
                 }
                 actual = actual.Siguiente;
             }
@@ -64,19 +65,19 @@ namespace ProyectoFinal
             {
                 if (actual.Zona == zona)
                 {
-                    if (actual.Tickets >= cantidad)
+                    if ((actual.Capacidad - actual.Tickets) >= cantidad)
                     {
-                        actual.Tickets -= cantidad;
+                        actual.Tickets += cantidad;
                         return true;
                     }
                     else
                     {
-                        return false; 
+                        return false;
                     }
                 }
                 actual = actual.Siguiente;
             }
-            return false; 
+            return false;
         }
 
         public void ReintegrarTickets(string zona, int cantidad)
