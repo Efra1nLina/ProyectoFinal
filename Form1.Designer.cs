@@ -51,6 +51,7 @@
             botonComprar.TabIndex = 1;
             botonComprar.Text = "Comprar";
             botonComprar.UseVisualStyleBackColor = true;
+            botonComprar.Click += botonComprar_Click;
             // 
             // botonCancelar
             // 
@@ -71,6 +72,7 @@
             Controls.Add(botonDisponibilidad);
             Name = "Form1";
             Text = "Form1";
+            Load += Form1_Load_1;
             ResumeLayout(false);
         }
 
