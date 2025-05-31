@@ -11,7 +11,7 @@ namespace ProyectoFinal
     {
         private int contadorBoletos;
         string carpeta = @"C:\estadio";
-        private string rutaArchivo = @"C:\estadio\transacciones.txt";
+        private readonly string rutaArchivo = @"C:\estadio\transacciones.txt";
 
         public ClassTransaccion()
         {
@@ -63,10 +63,6 @@ namespace ProyectoFinal
                     }
                 }
             }
-           // string rutaQR = $@"C:\estadio\QR_{boleto.Numero}.png";
-            //QR vistaQR = new QR(rutaQR);
-            //vistaQR.Show();
-
         }
 
         private void GuardarTransaccion(ClassBoleto boleto)

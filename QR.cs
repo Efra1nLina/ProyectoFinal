@@ -12,15 +12,18 @@ namespace ProyectoFinal
 {
     public partial class QR : Form
     {
-        public QR(string rutaImagenQR)
+        string rutaImagenQR { get; set; }
+        public QR(string ruta)
         {
             InitializeComponent();
+            rutaImagenQR = ruta;
+
 
         }
 
         private void QR_Load(object sender, EventArgs e)
         {
-            InitializeComponent();
+            
 
             if (File.Exists(rutaImagenQR))
             {

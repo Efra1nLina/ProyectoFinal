@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.DataFormats;
 
 namespace ProyectoFinal
 {
@@ -76,6 +77,13 @@ namespace ProyectoFinal
             // Procesar la transacción con lista de asientos
             ClassTransaccion transaccion = new ClassTransaccion();
             transaccion.ProcesarColaConAsientos(orden, estadio, listaAsientos); // este método lo agregaremos ahora
+
+            for (int i = 1; i <= cantidadBoletos; i++)
+            {
+                string rutaQR = $@"C:\estadio\QR_{i}.png";
+                QR vistaQR = new QR(rutaQR);
+                vistaQR.Show(); // Se abren múltiples formularios, uno por cada boleto
+            }
         }
     }
 }
