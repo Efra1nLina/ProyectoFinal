@@ -39,7 +39,7 @@ using System.Windows.Forms;
             imprimirZona.Text = "Zona: " + boleto.Zona;
             imprimirAsiento.Text = "Asiento: " + boleto.Asiento.ToString();
             imprimirNumero.Text = "N° Boleto: " + boleto.Numero.ToString();
-            imprimirFecha.Text = "Fecha: " + boleto.FechaHoraCompra.ToString();
+            imprimirFecha.Text =boleto.FechaHoraCompra.ToString();
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)

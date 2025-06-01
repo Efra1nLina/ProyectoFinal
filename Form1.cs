@@ -28,9 +28,10 @@ namespace ProyectoFinal
 
         private void botonComprar_Click(object sender, EventArgs e)
         {
-            Disponibilidad ventana = new Disponibilidad();
+            Disponibilidad ventana = new Disponibilidad(); 
 
-            Comprar ventana2 = new Comprar();
+            Comprar ventana2 = new Comprar(ventana); 
+
 
             // Por ejemplo: ventana principal a la izquierda
             ventana.Location = new Point(100, 100); // X = 100, Y = 100

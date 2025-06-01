@@ -24,11 +24,11 @@ namespace ProyectoFinal
             int paddingX = 8;
             int paddingY = 10;
             Font fuente = this.Font;
-            Brush fondo = Brushes.LightGray;
-
             SizeF tamañoTexto = g.MeasureString(nombreZona, new Font(fuente.FontFamily, 10, FontStyle.Bold));
             float textoX = (this.ClientSize.Width - tamañoTexto.Width) / 2;
             g.DrawString(nombreZona, new Font(fuente.FontFamily, 10, FontStyle.Bold), Brushes.Black, textoX, inicio.Y - 25);
+            ocupado.Text = SistemaGlobal.contadorOcupados.ToString();
+            libre.Text = (72 - SistemaGlobal.contadorOcupados).ToString();
 
             for (int fila = 0; fila < filas; fila++)
             {
@@ -46,7 +46,13 @@ namespace ProyectoFinal
                     int y = filaY;
 
                     Rectangle rect = new Rectangle(x, y, ancho, alto);
-                    g.FillRectangle(fondo, rect);
+                    //Para cambiar el color de los asientos ocupados verificando en la lista :D
+                    int numeroAsiento = contador - 1;
+                    // Color según ocupación
+                    Brush fondoColor = (numeroAsiento >= 0 && numeroAsiento < SistemaGlobal.listaAsientosOcupados.Count && SistemaGlobal.listaAsientosOcupados[numeroAsiento])
+                        ? Brushes.Red
+                        : Brushes.Green;
+                    g.FillRectangle(fondoColor, rect);
                     g.DrawRectangle(Pens.Black, rect);
 
                     string texto = contador.ToString();
@@ -74,11 +80,20 @@ namespace ProyectoFinal
             contador = DibujarZona(g, "Tribuna", 3, filaBase, new Point(0, 160), ref contador);
             filaBase += 3;
 
-            contador = DibujarZona(g, "General", 4, filaBase, new Point(0, 310), ref contador);
+            contador = DibujarZona(g, "General", 4, filaBase, new Point(0, 340), ref contador);
 
         }
 
         private void Disponibilidad_Load(object sender, EventArgs e)
+        {
+
+        }
+        public void ActualizarDisponibilidad()
+        {
+            this.Invalidate(); // Fuerza la actualización de la interfaz
+        }
+
+        private void label1_Click(object sender, EventArgs e)
         {
 
         }

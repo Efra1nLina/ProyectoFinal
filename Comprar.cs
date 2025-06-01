@@ -15,11 +15,11 @@ namespace ProyectoFinal
     {
         string? nombre, zona; 
         int numAsiento;
-        
-        public Comprar()
+        Disponibilidad disponibilidad;
+        public Comprar(Disponibilidad disponibilidadForm)
         {
             InitializeComponent();
-            
+            this.disponibilidad = disponibilidadForm;
 
         }
 
@@ -67,10 +67,20 @@ namespace ProyectoFinal
             for (int i = 0; i < cantidadBoletos; i++)
             {
                 orden.Insertar(nombre, zona);
+                SistemaGlobal.listaAsientosOcupados[listaAsientos[i]-1] = true;
+                
             }
-
+            SistemaGlobal.Ocupados(); //Actualizar mi contador de puestos ocupados :D
             // Procesar la transacción
             List<ClassBoleto> boletosGenerados = transaccion.ProcesarColaConAsientos(orden, estadio, listaAsientos);
+
+            if (disponibilidad == null)
+            {
+                disponibilidad = new Disponibilidad();
+            }
+            disponibilidad.Show();
+            disponibilidad.BringToFront();
+            disponibilidad.ActualizarDisponibilidad();
 
             foreach (var boleto in boletosGenerados)
             {

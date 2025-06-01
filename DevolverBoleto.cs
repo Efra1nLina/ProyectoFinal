@@ -31,28 +31,58 @@ namespace ProyectoFinal
         private void botonCancelar_Click(object sender, EventArgs e)
         {
             nombreC = nombreCliente.Text;
-            zonaE = zonaEl.SelectedItem.ToString();
+            zonaE = zonaEl.SelectedItem?.ToString();
+            // Leer los asientos ingresados separados por comas
+            string entrada = numTickets.Text;
+            string[] partes = entrada.Split(',');
 
-            if (!int.TryParse(numTickets.Text, out numTicket))
+            List<int> asientosAEliminar = new List<int>();
+
+            foreach (string parte in partes)
             {
-                MessageBox.Show("Número de tickets inválido");
-                return;
+                if (int.TryParse(parte.Trim(), out int numeroAsiento))
+                {
+                    if (numeroAsiento < 1 || numeroAsiento > SistemaGlobal.listaAsientosOcupados.Count)
+                    {
+                        MessageBox.Show($"El número de asiento {numeroAsiento} no existe");
+                        return;
+                    }
+
+                    if (!SistemaGlobal.listaAsientosOcupados[numeroAsiento - 1])
+                    {
+                        MessageBox.Show($"El asiento {numeroAsiento} ya está libre.");
+                        return;
+                    }
+
+                    asientosAEliminar.Add(numeroAsiento - 1); // Resta 1 porque la lista es base 0
+                }
+                else
+                {
+                    MessageBox.Show($"'{parte}' no es un número válido.");
+                    return;
+                }
             }
 
-            // Usar la pila global
-            SistemaGlobal.Compras.Push(zonaE, numTicket, nombreC);
+            // Cancelar los asientos
+            foreach (int index in asientosAEliminar)
+            {
+                SistemaGlobal.listaAsientosOcupados[index] = false;
+            }
 
-            // Reintegrar los tickets al estadio global
-            SistemaGlobal.Estadio.ReintegrarTickets(zonaE, numTicket);
+            // Actualizar contador de ocupados :D
+            SistemaGlobal.Ocupados();
 
-            // Reasignar desde pila a las personas en la cola
+            // Reintegrar los boletos cancelados
+            int cantidadCancelada = asientosAEliminar.Count;
+            SistemaGlobal.Compras.Push(zonaE, cantidadCancelada, nombreC);
+            SistemaGlobal.Estadio.ReintegrarTickets(zonaE, cantidadCancelada);
             SistemaGlobal.Compras.ReasignarDesdePila(SistemaGlobal.Orden, SistemaGlobal.Estadio);
 
-            MessageBox.Show("Boleto cancelado exitosamente");
+            MessageBox.Show($"{cantidadCancelada} boleto(s) cancelado(s) exitosamente.");
+            MessageBox.Show($"Asientos ocupados ahora: {SistemaGlobal.contadorOcupados}");
 
             MessageBox.Show(SistemaGlobal.Compras.Mostrar(), "Elementos en la Pila de Cancelaciones");
             MessageBox.Show(SistemaGlobal.Estadio.Mostrar(), "Zonas del Estadio");
-            
         }  
 
         private void zonaEl_SelectedIndexChanged(object sender, EventArgs e)
