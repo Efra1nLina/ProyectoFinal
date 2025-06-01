@@ -36,7 +36,7 @@ namespace ProyectoFinal
 
             while (actual != null)
             {
-                sb.AppendLine($"Zona: {actual.Zona}, Capacidad: {actual.Capacidad}, Tickets disponibles: {actual.Tickets}");
+                sb.AppendLine($"Zona: {actual.Zona}, Capacidad: {actual.Capacidad}, Lugares reservados: {actual.Tickets}");
                 actual = actual.Siguiente;
             }
 
@@ -87,7 +87,7 @@ namespace ProyectoFinal
             {
                 if (actual.Zona == zona)
                 {
-                    actual.Tickets += cantidad;
+                    actual.Tickets -= cantidad;
                     return;
                 }
                 actual = actual.Siguiente;

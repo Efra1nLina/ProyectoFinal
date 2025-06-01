@@ -64,34 +64,34 @@ namespace ProyectoFinal
             return lista;
         }
 
-        public void ReasignarDesdePila(ClassOrden orden, ClassEstadio estadio)
-        {
-            while (!orden.EstaVacia() && Pila != null)
+            public void ReasignarDesdePila(ClassOrden orden, ClassEstadio estadio)
             {
-                ClassNodoOrden? cliente = orden.Desencolar();
-                ClassNodoCompras? devolucion = Pila;
-
-                // Solo reasignar si la zona que pide el cliente es igual a la zona de la devolución
-                if (cliente != null && devolucion != null && cliente.ZonaDeseada == devolucion.Zona)
+                while (!orden.EstaVacia() && Pila != null)
                 {
-                    // Buscar la zona en el estadio
-                    ClassNodoEstadio? zona = estadio.Inicio;
-                    while (zona != null)
-                    {
-                        if (zona.Zona == devolucion.Zona)
-                        {
-                            // Aumentar tickets disponibles y simular asignación
-                            zona.Tickets += devolucion.TicketsDevueltos;
-                            MessageBox.Show($"Cliente {cliente.Nombre} recibió {devolucion.TicketsDevueltos} tickets de la zona {zona.Zona} que fueron cancelados por {devolucion.Cliente}");
+                    ClassNodoOrden? cliente = orden.Desencolar();
+                    ClassNodoCompras? devolucion = Pila;
 
-                            Pop(); // Eliminar el nodo de la pila
-                            break;
+                    // Solo reasignar si la zona que pide el cliente es igual a la zona de la devolución
+                    if (cliente != null && devolucion != null && cliente.ZonaDeseada == devolucion.Zona)
+                    {
+                        // Buscar la zona en el estadio
+                        ClassNodoEstadio? zona = estadio.Inicio;
+                        while (zona != null)
+                        {
+                            if (zona.Zona == devolucion.Zona)
+                            {
+                                // Aumentar tickets disponibles y simular asignación
+                                zona.Tickets += devolucion.TicketsDevueltos;
+                                MessageBox.Show($"Cliente {cliente.Nombre} recibió {devolucion.TicketsDevueltos} tickets de la zona {zona.Zona} que fueron cancelados por {devolucion.Cliente}");
+
+                                Pop(); // Eliminar el nodo de la pila
+                                break;
+                            }
+                            zona = zona.Siguiente;
                         }
-                        zona = zona.Siguiente;
                     }
                 }
             }
-        }
 
         public int MostrarNodos()
         {

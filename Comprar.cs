@@ -38,11 +38,9 @@ namespace ProyectoFinal
             nombre = nombreCliente.Text;
             zona = zonaElejida.SelectedItem.ToString();
 
-            // Leer cantidad de boletos
             int cantidadBoletos = 1;
             int.TryParse(cantBoletos.Text, out cantidadBoletos);
 
-            // Leer y procesar asientos
             List<int> listaAsientos = new List<int>();
             string[] asientosTexto = asiento.Text.Split(',');
 
@@ -54,35 +52,31 @@ namespace ProyectoFinal
                 }
             }
 
-            // Validar que haya la misma cantidad de asientos que de boletos
             if (listaAsientos.Count != cantidadBoletos)
             {
                 MessageBox.Show("La cantidad de asientos no coincide con la cantidad de boletos.");
                 return;
             }
 
-            // Crear estadio
-            ClassEstadio estadio = new ClassEstadio();
-            estadio.AgregarZona("VIP", 100, 0);
-            estadio.AgregarZona("General", 200, 0);
+            
+            ClassEstadio estadio = SistemaGlobal.Estadio;
+            ClassOrden orden = SistemaGlobal.Orden;
+            ClassTransaccion transaccion = SistemaGlobal.Transaccion;
 
-            // Crear la orden y pasar cada asiento
-            ClassOrden orden = new ClassOrden();
+            // Inserta en la orden
             for (int i = 0; i < cantidadBoletos; i++)
             {
-                
-                orden.Insertar(nombre, zona); // Aquí no pasamos asiento directamente
+                orden.Insertar(nombre, zona);
             }
 
-            // Procesar la transacción con lista de asientos
-            ClassTransaccion transaccion = new ClassTransaccion();
-            transaccion.ProcesarColaConAsientos(orden, estadio, listaAsientos); // este método lo agregaremos ahora
+            // Procesar la transacción
+            transaccion.ProcesarColaConAsientos(orden, estadio, listaAsientos);
 
             for (int i = 1; i <= cantidadBoletos; i++)
             {
                 string rutaQR = $@"C:\estadio\QR_{i}.png";
                 QR vistaQR = new QR(rutaQR);
-                vistaQR.Show(); // uno por cada boleto
+                vistaQR.Show();
             }
         }
     }

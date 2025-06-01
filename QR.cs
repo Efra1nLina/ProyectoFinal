@@ -23,7 +23,7 @@ namespace ProyectoFinal
 
         private void QR_Load(object sender, EventArgs e)
         {
-            
+
 
             if (File.Exists(rutaImagenQR))
             {
@@ -33,6 +33,11 @@ namespace ProyectoFinal
             {
                 MessageBox.Show("No se encontró la imagen del código QR.");
             }
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

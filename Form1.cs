@@ -51,7 +51,9 @@ namespace ProyectoFinal
 
         private void Form1_Load_1(object sender, EventArgs e)
         {
-
+            SistemaGlobal.Estadio.AgregarZona("VIP", 9, 0);
+            SistemaGlobal.Estadio.AgregarZona("General", 42, 0);
+            SistemaGlobal.Estadio.AgregarZona("Tribuna", 21, 0);
         }
 
         private void botonCancelar_Click(object sender, EventArgs e)

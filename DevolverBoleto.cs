@@ -39,23 +39,20 @@ namespace ProyectoFinal
                 return;
             }
 
-            // Agregar a la pila de cancelaciones
-            cancelar.Push(zonaE, numTicket, nombreC);
+            // Usar la pila global
+            SistemaGlobal.Compras.Push(zonaE, numTicket, nombreC);
 
-            // Reintegrar los tickets al estadio
-            estadio.ReintegrarTickets(zonaE, numTicket);
+            // Reintegrar los tickets al estadio global
+            SistemaGlobal.Estadio.ReintegrarTickets(zonaE, numTicket);
 
-            // Intentar reasignar a personas en la cola
-            cancelar.ReasignarDesdePila(orden, estadio);
+            // Reasignar desde pila a las personas en la cola
+            SistemaGlobal.Compras.ReasignarDesdePila(SistemaGlobal.Orden, SistemaGlobal.Estadio);
 
             MessageBox.Show("Boleto cancelado exitosamente");
+
+            MessageBox.Show(SistemaGlobal.Compras.Mostrar(), "Elementos en la Pila de Cancelaciones");
+            MessageBox.Show(SistemaGlobal.Estadio.Mostrar(), "Zonas del Estadio");
             
-            MessageBox.Show(string.Join(" , ", cancelar.Mostrar()), "Elementos de la Lista", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            estadio.Mostrar();
-            MessageBox.Show(estadio.Mostrar(), "oaaaaaaaaaaaaaaa", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-            MessageBox.Show(orden.MostrarCola(), "nose", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
         }
 
         private void zonaEl_SelectedIndexChanged(object sender, EventArgs e)
