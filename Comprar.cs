@@ -70,14 +70,15 @@ namespace ProyectoFinal
             }
 
             // Procesar la transacción
-            transaccion.ProcesarColaConAsientos(orden, estadio, listaAsientos);
+            List<ClassBoleto> boletosGenerados = transaccion.ProcesarColaConAsientos(orden, estadio, listaAsientos);
 
-            for (int i = 1; i <= cantidadBoletos; i++)
+            foreach (var boleto in boletosGenerados)
             {
-                string rutaQR = $@"C:\estadio\QR_{i}.png";
-                QR vistaQR = new QR(rutaQR);
+                string rutaQR = $@"C:\estadio\QR_{boleto.Numero}.png";
+                QR vistaQR = new QR(boleto, rutaQR);
                 vistaQR.Show();
             }
+
         }
     }
 }

@@ -8,15 +8,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ProyectoFinal
-{
+    namespace ProyectoFinal
+    {
     public partial class QR : Form
     {
         string rutaImagenQR { get; set; }
-        public QR(string ruta)
+        ClassBoleto boleto;
+        public QR(ClassBoleto boleto, string ruta)
         {
             InitializeComponent();
             rutaImagenQR = ruta;
+            this.boleto = boleto;
 
 
         }
@@ -33,9 +35,19 @@ namespace ProyectoFinal
             {
                 MessageBox.Show("No se encontró la imagen del código QR.");
             }
+            imprimirNombre.Text = "Nombre: " + boleto.NombreComprador;
+            imprimirZona.Text = "Zona: " + boleto.Zona;
+            imprimirAsiento.Text = "Asiento: " + boleto.Asiento.ToString();
+            imprimirNumero.Text = "N° Boleto: " + boleto.Numero.ToString();
+            imprimirFecha.Text = "Fecha: " + boleto.FechaHoraCompra.ToString();
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void imprimirNumero_Click(object sender, EventArgs e)
         {
 
         }

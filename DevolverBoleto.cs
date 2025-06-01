@@ -53,7 +53,7 @@ namespace ProyectoFinal
             MessageBox.Show(SistemaGlobal.Compras.Mostrar(), "Elementos en la Pila de Cancelaciones");
             MessageBox.Show(SistemaGlobal.Estadio.Mostrar(), "Zonas del Estadio");
             
-        }
+        }  
 
         private void zonaEl_SelectedIndexChanged(object sender, EventArgs e)
         {

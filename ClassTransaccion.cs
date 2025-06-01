@@ -18,8 +18,9 @@ namespace ProyectoFinal
             contadorBoletos = 1;
         }
 
-        public void ProcesarColaConAsientos(ClassOrden orden, ClassEstadio estadio, List<int> listaAsientos)
+        public List<ClassBoleto> ProcesarColaConAsientos(ClassOrden orden, ClassEstadio estadio, List<int> listaAsientos)
         {
+            List<ClassBoleto> boletosGenerados = new List<ClassBoleto>();
             int indexAsiento = 0;
 
             while (!orden.EstaVacia() && indexAsiento < listaAsientos.Count)
@@ -48,24 +49,22 @@ namespace ProyectoFinal
                                 boleto = new ClassBoleto(contadorBoletos, cliente.ZonaDeseada, asientoAsignado, cliente.Nombre);
                             }
 
-                            GuardarTransaccion(boleto);
-                            GenerarQR(boleto);
+                            GuardarTransaccionYGenerarQR(boleto);
 
-                            MessageBox.Show("Compra realizada:\n" + boleto.ObtenerInformacion());
+                            boletosGenerados.Add(boleto);
 
                             contadorBoletos++;
                             indexAsiento++;
                         }
                     }
-                    else
-                    {
-                        MessageBox.Show($"No hay boletos disponibles en la zona {cliente.ZonaDeseada} para {cliente.Nombre}");
-                    }
                 }
             }
+
+            return boletosGenerados;
         }
 
-        private void GuardarTransaccion(ClassBoleto boleto)
+
+        private void GuardarTransaccionYGenerarQR(ClassBoleto boleto)
         {
             
             if (!Directory.Exists(carpeta))
@@ -76,16 +75,8 @@ namespace ProyectoFinal
             {
                 sw.WriteLine($"{boleto.Numero};{boleto.NombreComprador};{boleto.Zona};{boleto.Asiento};{boleto.FechaHoraCompra}");
             }
-        }
 
-        private void GenerarQR(ClassBoleto boleto)
-        {
-            string carpeta = @"C:\estadio";
-            if (!Directory.Exists(carpeta))
-            {
-                Directory.CreateDirectory(carpeta);
-            }
-
+            //Para el QR
             string contenidoQR = $"Boleto #{boleto.Numero}\nZona: {boleto.Zona}\nAsiento: {boleto.Asiento}\nCliente: {boleto.NombreComprador}";
             string rutaImagen = Path.Combine(carpeta, $"QR_{boleto.Numero}.png");
 
@@ -96,6 +87,8 @@ namespace ProyectoFinal
 
             qrImage.Save(rutaImagen, ImageFormat.Png);
         }
+
+       
     }
 }
 
