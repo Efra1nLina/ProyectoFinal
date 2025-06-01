@@ -13,7 +13,7 @@ namespace ProyectoFinal
     public partial class Form1 : Form
     {
 
-        
+
 
         public Form1()
         {
@@ -40,7 +40,7 @@ namespace ProyectoFinal
             // Mostrar ambas
             ventana.Show();
             ventana2.Show();
-            
+
 
         }
 
@@ -51,6 +51,16 @@ namespace ProyectoFinal
 
         private void Form1_Load_1(object sender, EventArgs e)
         {
+
+        }
+
+        private void botonCancelar_Click(object sender, EventArgs e)
+        {
+            ClassOrden ordenGlobal = new ClassOrden();
+            ClassEstadio estadioGlobal = new ClassEstadio();
+
+            DevolverBoleto ventana = new DevolverBoleto(ordenGlobal, estadioGlobal);
+            ventana.Show();
 
         }
     }

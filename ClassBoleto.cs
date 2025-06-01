@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProyectoFinal
 {
-    internal class ClassBoleto
+    public class ClassBoleto
     {
 
         public int Numero { get; set; }               

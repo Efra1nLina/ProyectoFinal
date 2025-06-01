@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProyectoFinal
 {
-    internal class ClassOrden
+    public class ClassOrden
     {
         
         private ClassNodoOrden? frente;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProyectoFinal
 {
-    internal class ClassNodoEstadio
+    public class ClassNodoEstadio
     {
         public string Zona { get; set; }
         public int Capacidad { get; set; }

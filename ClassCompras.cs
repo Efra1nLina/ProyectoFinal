@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProyectoFinal
 {
-    internal class ClassCompras
+    public class ClassCompras
     {
         public ClassNodoCompras? Pila { get; set; }
         public int TotalNodos { get; set; }
@@ -46,7 +46,7 @@ namespace ProyectoFinal
 
         public string Mostrar()
         {
-            string lista = null;
+            string? lista = null;
             if (Pila != null)
             {
                 ClassNodoCompras auxiliar = new ClassNodoCompras(null, 0, null);

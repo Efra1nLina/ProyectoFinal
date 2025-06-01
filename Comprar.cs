@@ -13,7 +13,7 @@ namespace ProyectoFinal
 {
     public partial class Comprar : Form
     {
-        string nombre, zona; 
+        string? nombre, zona; 
         int numAsiento;
         
         public Comprar()
@@ -70,7 +70,7 @@ namespace ProyectoFinal
             ClassOrden orden = new ClassOrden();
             for (int i = 0; i < cantidadBoletos; i++)
             {
-                // Vamos a modificar el nodo para aceptar asiento individual si hace falta
+                
                 orden.Insertar(nombre, zona); // Aquí no pasamos asiento directamente
             }
 
@@ -82,7 +82,7 @@ namespace ProyectoFinal
             {
                 string rutaQR = $@"C:\estadio\QR_{i}.png";
                 QR vistaQR = new QR(rutaQR);
-                vistaQR.Show(); // Se abren múltiples formularios, uno por cada boleto
+                vistaQR.Show(); // uno por cada boleto
             }
         }
     }

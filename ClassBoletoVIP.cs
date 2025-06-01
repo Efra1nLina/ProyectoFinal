@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProyectoFinal
 {
-    internal class ClassBoletoVIP : ClassBoleto
+    public class ClassBoletoVIP : ClassBoleto
     {
         public string Beneficios { get; set; }
 

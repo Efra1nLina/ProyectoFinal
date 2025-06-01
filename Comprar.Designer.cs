@@ -35,9 +35,9 @@
             label3 = new Label();
             asiento = new TextBox();
             aceptarComprar = new Button();
-            comprarDeNuevo = new Button();
             cantBoletos = new TextBox();
             label4 = new Label();
+            comprarDeNuevo = new Button();
             SuspendLayout();
             // 
             // label1
@@ -101,15 +101,6 @@
             aceptarComprar.UseVisualStyleBackColor = true;
             aceptarComprar.Click += aceptarComprar_Click;
             // 
-            // comprarDeNuevo
-            // 
-            comprarDeNuevo.Location = new Point(38, 343);
-            comprarDeNuevo.Name = "comprarDeNuevo";
-            comprarDeNuevo.Size = new Size(131, 35);
-            comprarDeNuevo.TabIndex = 7;
-            comprarDeNuevo.Text = "Realizar otra compra";
-            comprarDeNuevo.UseVisualStyleBackColor = true;
-            // 
             // cantBoletos
             // 
             cantBoletos.Location = new Point(266, 70);
@@ -125,6 +116,15 @@
             label4.Size = new Size(113, 15);
             label4.TabIndex = 9;
             label4.Text = "Cantidad de boletos";
+            // 
+            // comprarDeNuevo
+            // 
+            comprarDeNuevo.Location = new Point(38, 343);
+            comprarDeNuevo.Name = "comprarDeNuevo";
+            comprarDeNuevo.Size = new Size(131, 35);
+            comprarDeNuevo.TabIndex = 7;
+            comprarDeNuevo.Text = "Realizar otra compra";
+            comprarDeNuevo.UseVisualStyleBackColor = true;
             // 
             // Comprar
             // 
@@ -157,12 +157,12 @@
         private Label label3;
         private TextBox textBox2;
         private Button aceptarComprar;
-        private Button comprarDeNuevo;
         private ComboBox zonaElejida;
         private TextBox nombreCliente;
         private TextBox asiento;
         private TextBox textBox3;
         private Label label4;
         private TextBox cantBoletos;
+        private Button comprarDeNuevo;
     }
 }

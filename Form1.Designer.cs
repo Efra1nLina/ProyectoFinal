@@ -61,6 +61,7 @@
             botonCancelar.TabIndex = 2;
             botonCancelar.Text = "Cancelar boleto";
             botonCancelar.UseVisualStyleBackColor = true;
+            botonCancelar.Click += botonCancelar_Click;
             // 
             // Form1
             // 

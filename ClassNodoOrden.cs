@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProyectoFinal
 {
-    internal class ClassNodoOrden
+    public class ClassNodoOrden
     {
         public string Nombre { get; set; }
         public string ZonaDeseada { get; set; }
