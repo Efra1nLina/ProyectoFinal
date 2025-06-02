@@ -68,7 +68,7 @@ namespace ProyectoFinal
             {
                 SistemaGlobal.listaAsientosOcupados[index] = false;
             }
-
+            SistemaGlobal.Ocupados();
             // Actualizar contador de ocupados :D
             SistemaGlobal.Ocupados();
 

@@ -27,6 +27,7 @@ namespace ProyectoFinal
 
         public static void Ocupados()
         {
+            contadorOcupados = 0;
 
             for (int i = 0; i < listaAsientosOcupados.Count; i++)
             {

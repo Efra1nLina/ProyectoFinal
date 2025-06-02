@@ -18,6 +18,7 @@ namespace ProyectoFinal
         public Form1()
         {
             InitializeComponent();
+            LimpiarArchivosInicio();
         }
 
         private void botonDisponibilidad_Click(object sender, EventArgs e)
@@ -65,6 +66,37 @@ namespace ProyectoFinal
             DevolverBoleto ventana = new DevolverBoleto(ordenGlobal, estadioGlobal);
             ventana.Show();
 
+        }
+
+        private void LimpiarArchivosInicio()
+        {
+            string carpeta = @"C:\estadio";
+            string rutaArchivo = Path.Combine(carpeta, "transacciones.txt");
+
+            try
+            {
+                if (!Directory.Exists(carpeta))
+                {
+                    Directory.CreateDirectory(carpeta);
+                    return;
+                }
+
+                // Borrar archivo de transacciones
+                if (File.Exists(rutaArchivo))
+                {
+                    File.Delete(rutaArchivo);
+                }
+
+                // Borrar imágenes QR
+                foreach (var archivo in Directory.GetFiles(carpeta, "QR_*.png"))
+                {
+                    File.Delete(archivo);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al limpiar archivos: {ex.Message}");
+            }
         }
     }
 }

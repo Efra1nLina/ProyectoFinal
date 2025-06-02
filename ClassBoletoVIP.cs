@@ -14,6 +14,8 @@ namespace ProyectoFinal
             : base(numero, zona, asiento, nombreComprador)
         {
             Beneficios = "Entrada preferencial, bebidas incluidas, acceso a área exclusiva";
+            // Debug
+            MessageBox.Show($"Boleto VIP creado - Beneficios: {Beneficios}");
         }
 
         public override string ObtenerInformacion()

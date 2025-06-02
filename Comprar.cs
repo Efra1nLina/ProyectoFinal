@@ -36,7 +36,7 @@ namespace ProyectoFinal
         private void aceptarComprar_Click(object sender, EventArgs e)
         {
             nombre = nombreCliente.Text;
-            zona = zonaElejida.SelectedItem.ToString();
+            zona =zonaElejida.SelectedItem.ToString();
 
             int cantidadBoletos = 1;
             int.TryParse(cantBoletos.Text, out cantidadBoletos);

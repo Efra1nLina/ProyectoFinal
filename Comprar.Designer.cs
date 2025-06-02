@@ -52,7 +52,7 @@
             // zonaElejida
             // 
             zonaElejida.FormattingEnabled = true;
-            zonaElejida.Items.AddRange(new object[] { "General", "Tribuna", "Vip" });
+            zonaElejida.Items.AddRange(new object[] { "General", "Tribuna", "VIP" });
             zonaElejida.Location = new Point(38, 70);
             zonaElejida.Name = "zonaElejida";
             zonaElejida.Size = new Size(121, 23);
