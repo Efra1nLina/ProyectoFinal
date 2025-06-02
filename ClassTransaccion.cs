@@ -29,8 +29,6 @@ namespace ProyectoFinal
 
                 if (cliente != null)
                 {
-                    MessageBox.Show($"Procesando cliente: {cliente.Nombre}, Zona: {cliente.ZonaDeseada}"); // Debug
-
                     bool disponible = estadio.VerificarDisponibilidad(cliente.ZonaDeseada, 1);
 
                     if (disponible)
@@ -44,17 +42,12 @@ namespace ProyectoFinal
 
                             if (cliente.ZonaDeseada.Equals("VIP", StringComparison.OrdinalIgnoreCase))
                             {
-                                MessageBox.Show("Creando boleto VIP"); // Debug
                                 boleto = new ClassBoletoVIP(contadorBoletos, cliente.ZonaDeseada, asientoAsignado, cliente.Nombre);
                             }
                             else
                             {
                                 boleto = new ClassBoleto(contadorBoletos, cliente.ZonaDeseada, asientoAsignado, cliente.Nombre);
                             }
-
-                            // Debug antes de guardar
-                            MessageBox.Show($"Guardando boleto #{contadorBoletos} - Tipo: {(boleto is ClassBoletoVIP ? "VIP" : "Normal")}");
-
                             GuardarTransaccionYGenerarQR(boleto);
                             boletosGenerados.Add(boleto);
                             contadorBoletos++;
@@ -76,7 +69,6 @@ namespace ProyectoFinal
                 if (!Directory.Exists(carpeta))
                 {
                     Directory.CreateDirectory(carpeta);
-                    MessageBox.Show($"Directorio creado en: {carpeta}");
                 }
 
                 // Contenido QR
@@ -94,7 +86,6 @@ namespace ProyectoFinal
                     if (boleto is ClassBoletoVIP vip2)
                     {
                         sw.WriteLine($"{vip2.Numero};{vip2.NombreComprador};{vip2.Zona};{vip2.Asiento};{vip2.FechaHoraCompra};{vip2.Beneficios}");
-                        MessageBox.Show("Boleto VIP guardado en archivo");
                     }
                     else
                     {
@@ -111,11 +102,10 @@ namespace ProyectoFinal
                 Bitmap qrImage = qrCode.GetGraphic(20);
 
                 qrImage.Save(rutaImagen, ImageFormat.Png);
-                MessageBox.Show($"QR generado en: {rutaImagen}");
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error crítico: {ex.Message}\n\nStack Trace:\n{ex.StackTrace}");
+                MessageBox.Show("Error");
             }
 
         }

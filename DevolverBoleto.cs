@@ -54,11 +54,11 @@ namespace ProyectoFinal
                         return;
                     }
 
-                    asientosAEliminar.Add(numeroAsiento - 1); // Resta 1 porque la lista es base 0
+                    asientosAEliminar.Add(numeroAsiento - 1); // Resta 1 porque la lista inicia en indice 0
                 }
                 else
                 {
-                    MessageBox.Show($"'{parte}' no es un número válido.");
+                    MessageBox.Show($"{parte} no es un número válido.");
                     return;
                 }
             }
@@ -68,7 +68,6 @@ namespace ProyectoFinal
             {
                 SistemaGlobal.listaAsientosOcupados[index] = false;
             }
-            SistemaGlobal.Ocupados();
             // Actualizar contador de ocupados :D
             SistemaGlobal.Ocupados();
 
@@ -77,12 +76,8 @@ namespace ProyectoFinal
             SistemaGlobal.Compras.Push(zonaE, cantidadCancelada, nombreC);
             SistemaGlobal.Estadio.ReintegrarTickets(zonaE, cantidadCancelada);
             SistemaGlobal.Compras.ReasignarDesdePila(SistemaGlobal.Orden, SistemaGlobal.Estadio);
-
             MessageBox.Show($"{cantidadCancelada} boleto(s) cancelado(s) exitosamente.");
             MessageBox.Show($"Asientos ocupados ahora: {SistemaGlobal.contadorOcupados}");
-
-            MessageBox.Show(SistemaGlobal.Compras.Mostrar(), "Elementos en la Pila de Cancelaciones");
-            MessageBox.Show(SistemaGlobal.Estadio.Mostrar(), "Zonas del Estadio");
         }  
 
         private void zonaEl_SelectedIndexChanged(object sender, EventArgs e)
