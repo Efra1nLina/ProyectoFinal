@@ -40,7 +40,8 @@
             // 
             // pictureBox1
             // 
-            pictureBox1.Location = new Point(368, 36);
+            pictureBox1.BackColor = Color.Thistle;
+            pictureBox1.Location = new Point(368, 53);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(150, 123);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
@@ -51,36 +52,40 @@
             // imprimirNombre
             // 
             imprimirNombre.AutoSize = true;
+            imprimirNombre.Font = new Font("Sans Serif Collection", 8.999999F, FontStyle.Regular, GraphicsUnit.Point, 0);
             imprimirNombre.Location = new Point(25, 36);
             imprimirNombre.Name = "imprimirNombre";
-            imprimirNombre.Size = new Size(14, 15);
+            imprimirNombre.Size = new Size(25, 41);
             imprimirNombre.TabIndex = 1;
             imprimirNombre.Text = ":)";
             // 
             // imprimirZona
             // 
             imprimirZona.AutoSize = true;
+            imprimirZona.Font = new Font("Sans Serif Collection", 8.999999F, FontStyle.Regular, GraphicsUnit.Point, 0);
             imprimirZona.Location = new Point(25, 77);
             imprimirZona.Name = "imprimirZona";
-            imprimirZona.Size = new Size(14, 15);
+            imprimirZona.Size = new Size(25, 41);
             imprimirZona.TabIndex = 2;
             imprimirZona.Text = ":)";
             // 
             // imprimirAsiento
             // 
             imprimirAsiento.AutoSize = true;
+            imprimirAsiento.Font = new Font("Sans Serif Collection", 8.999999F, FontStyle.Regular, GraphicsUnit.Point, 0);
             imprimirAsiento.Location = new Point(25, 114);
             imprimirAsiento.Name = "imprimirAsiento";
-            imprimirAsiento.Size = new Size(14, 15);
+            imprimirAsiento.Size = new Size(25, 41);
             imprimirAsiento.TabIndex = 3;
             imprimirAsiento.Text = ":)";
             // 
             // imprimirNumero
             // 
             imprimirNumero.AutoSize = true;
+            imprimirNumero.Font = new Font("Sans Serif Collection", 8.999999F, FontStyle.Regular, GraphicsUnit.Point, 0);
             imprimirNumero.Location = new Point(368, 9);
             imprimirNumero.Name = "imprimirNumero";
-            imprimirNumero.Size = new Size(14, 15);
+            imprimirNumero.Size = new Size(25, 41);
             imprimirNumero.TabIndex = 4;
             imprimirNumero.Text = ":)";
             imprimirNumero.Click += imprimirNumero_Click;
@@ -88,18 +93,20 @@
             // imprimirFecha
             // 
             imprimirFecha.AutoSize = true;
+            imprimirFecha.Font = new Font("Sans Serif Collection", 8.999999F, FontStyle.Regular, GraphicsUnit.Point, 0);
             imprimirFecha.Location = new Point(25, 144);
             imprimirFecha.Name = "imprimirFecha";
-            imprimirFecha.Size = new Size(14, 15);
+            imprimirFecha.Size = new Size(25, 41);
             imprimirFecha.TabIndex = 5;
             imprimirFecha.Text = ":)";
             // 
             // labelBeneficios
             // 
             labelBeneficios.AutoSize = true;
+            labelBeneficios.Font = new Font("Sans Serif Collection", 8.999999F, FontStyle.Regular, GraphicsUnit.Point, 0);
             labelBeneficios.Location = new Point(25, 174);
             labelBeneficios.Name = "labelBeneficios";
-            labelBeneficios.Size = new Size(14, 15);
+            labelBeneficios.Size = new Size(25, 41);
             labelBeneficios.TabIndex = 6;
             labelBeneficios.Text = ":)";
             // 
@@ -107,7 +114,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(548, 198);
+            ClientSize = new Size(550, 213);
             Controls.Add(labelBeneficios);
             Controls.Add(imprimirFecha);
             Controls.Add(imprimirNumero);

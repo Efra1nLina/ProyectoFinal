@@ -51,7 +51,7 @@ namespace ProyectoFinal
                     // Color según ocupación
                     Brush fondoColor = (numeroAsiento >= 0 && numeroAsiento < SistemaGlobal.listaAsientosOcupados.Count && SistemaGlobal.listaAsientosOcupados[numeroAsiento])
                         ? Brushes.Red
-                        : Brushes.Green;
+                        : Brushes.LightGreen;
                     g.FillRectangle(fondoColor, rect);
                     g.DrawRectangle(Pens.Black, rect);
 
@@ -94,6 +94,11 @@ namespace ProyectoFinal
         }
 
         private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void libre_Click(object sender, EventArgs e)
         {
 
         }
