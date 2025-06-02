@@ -30,6 +30,21 @@ namespace ProyectoFinal
 
         private void botonCancelar_Click(object sender, EventArgs e)
         {
+            
+        }
+
+        private void zonaEl_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void DevolverBoleto_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
             nombreC = nombreCliente.Text;
             zonaE = zonaEl.SelectedItem?.ToString();
             // Leer los asientos ingresados separados por comas
@@ -78,16 +93,6 @@ namespace ProyectoFinal
             SistemaGlobal.Compras.ReasignarDesdePila(SistemaGlobal.Orden, SistemaGlobal.Estadio);
             MessageBox.Show($"{cantidadCancelada} boleto(s) cancelado(s) exitosamente.");
             MessageBox.Show($"Asientos ocupados ahora: {SistemaGlobal.contadorOcupados}");
-        }  
-
-        private void zonaEl_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void DevolverBoleto_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }
