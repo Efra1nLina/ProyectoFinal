@@ -29,9 +29,9 @@ namespace ProyectoFinal
 
         private void botonComprar_Click(object sender, EventArgs e)
         {
-            Disponibilidad ventana = new Disponibilidad(); 
+            Disponibilidad ventana = new Disponibilidad();
 
-            Comprar ventana2 = new Comprar(ventana); 
+            Comprar ventana2 = new Comprar(ventana);
 
 
             // Por ejemplo: ventana principal a la izquierda
@@ -97,6 +97,38 @@ namespace ProyectoFinal
             {
                 MessageBox.Show($"Error al limpiar archivos: {ex.Message}");
             }
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            Disponibilidad ventana = new Disponibilidad();
+            ventana.Show();
+        }
+
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+            Disponibilidad ventana = new Disponibilidad();
+
+            Comprar ventana2 = new Comprar(ventana);
+
+
+            // Por ejemplo: ventana principal a la izquierda
+            ventana.Location = new Point(100, 100); // X = 100, Y = 100
+                                                    // Y la otra a la derecha (ajusta el valor 800 si la ventana es más ancha)
+            ventana2.Location = new Point(ventana.Location.X + ventana.Width + 10, ventana.Location.Y);
+
+            // Mostrar ambas
+            ventana.Show();
+            ventana2.Show();
+        }
+
+        private void pictureBox4_Click(object sender, EventArgs e)
+        {
+            ClassOrden ordenGlobal = new ClassOrden();
+            ClassEstadio estadioGlobal = new ClassEstadio();
+
+            DevolverBoleto ventana = new DevolverBoleto(ordenGlobal, estadioGlobal);
+            ventana.Show();
         }
     }
 }

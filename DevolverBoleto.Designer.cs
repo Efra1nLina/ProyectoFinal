@@ -116,6 +116,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.AliceBlue;
             ClientSize = new Size(441, 340);
             Controls.Add(label4);
             Controls.Add(botonCancelar);
