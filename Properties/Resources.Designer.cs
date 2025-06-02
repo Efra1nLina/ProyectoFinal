@@ -223,6 +223,26 @@ namespace ProyectoFinal.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap pago_seguro {
+            get {
+                object obj = ResourceManager.GetObject("pago-seguro", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap seguro {
+            get {
+                object obj = ResourceManager.GetObject("seguro", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap verificar {
             get {
                 object obj = ResourceManager.GetObject("verificar", resourceCulture);

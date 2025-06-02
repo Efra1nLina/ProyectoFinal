@@ -161,7 +161,104 @@ namespace ProyectoFinal
                     return "Zona no reconocida.";
             }
         }
-        
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            nombre = nombreCliente.Text;
+            zona = zonaElejida.SelectedItem.ToString();
+            // Validar selección de zona
+            if (string.IsNullOrEmpty(zona))
+            {
+                MessageBox.Show("Por favor seleccione una zona válida.");
+                return;
+            }
+
+            // Obtener cantidad de boletos
+            if (!int.TryParse(cantBoletos.Text, out int cantidadBoletos) || cantidadBoletos < 1)
+            {
+                MessageBox.Show("Ingrese una cantidad válida de boletos.");
+                return;
+            }
+
+            // Procesar asientos ingresados
+            List<int> listaAsientos = new List<int>();
+            string[] asientosTexto = asiento.Text.Split(',');
+
+            foreach (string num in asientosTexto)
+            {
+                if (int.TryParse(num.Trim(), out int asientoNum))
+                {
+                    // Validar rango general (1-72)
+                    if (asientoNum < 1 || asientoNum > 72)
+                    {
+                        MessageBox.Show($"El asiento {asientoNum} no existe. Debe ser entre 1 y 72.");
+                        return;
+                    }
+                    listaAsientos.Add(asientoNum);
+                }
+                else
+                {
+                    MessageBox.Show($"'{num}' no es un número de asiento válido.");
+                    return;
+                }
+            }
+
+            // Validar cantidad de asientos vs boletos
+            if (listaAsientos.Count != cantidadBoletos)
+            {
+                MessageBox.Show("La cantidad de asientos no coincide con la cantidad de boletos.");
+                return;
+            }
+
+            // Validar que los asientos correspondan a la zona seleccionada
+            foreach (int asientoNum in listaAsientos)
+            {
+                if (!AsientoPerteneceAZona(asientoNum, zona))
+                {
+                    string rangoEsperado = ObtenerRangoZona(zona);
+                    MessageBox.Show($"El asiento {asientoNum} no pertenece a la zona {zona}. {rangoEsperado}");
+                    return;
+                }
+
+                // Validar si el asiento ya está ocupado
+                if (SistemaGlobal.listaAsientosOcupados[asientoNum - 1])
+                {
+                    MessageBox.Show($"El asiento {asientoNum} ya está ocupado.");
+                    return;
+                }
+            }
+
+            // Procesar la compra
+            ClassEstadio estadio = SistemaGlobal.Estadio;
+            ClassOrden orden = SistemaGlobal.Orden;
+            ClassTransaccion transaccion = SistemaGlobal.Transaccion;
+
+            // Insertar en la orden
+            for (int i = 0; i < cantidadBoletos; i++)
+            {
+                orden.Insertar(nombre, zona);
+                SistemaGlobal.listaAsientosOcupados[listaAsientos[i] - 1] = true;
+            }
+            SistemaGlobal.Ocupados();
+
+            // Procesar la transacción
+            List<ClassBoleto> boletosGenerados = transaccion.ProcesarColaConAsientos(orden, estadio, listaAsientos);
+            //Para mostrar la ventana disponibilidad
+            if (disponibilidad == null)
+            {
+                disponibilidad = new Disponibilidad();
+            }
+            disponibilidad.Show();
+            disponibilidad.BringToFront();
+            disponibilidad.ActualizarDisponibilidad();
+
+            foreach (var boleto in boletosGenerados)
+            {
+                string rutaQR = $@"C:\estadio\QR_{boleto.Numero}.png";
+                QR vistaQR = new QR(boleto, rutaQR);
+                vistaQR.Show();
+            }
+        }
     }
 }
     
