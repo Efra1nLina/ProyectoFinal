@@ -72,6 +72,7 @@ namespace ProyectoFinal
             }
             SistemaGlobal.Ocupados(); //Actualizar mi contador de puestos ocupados :D
             // Procesar la transacción
+
             List<ClassBoleto> boletosGenerados = transaccion.ProcesarColaConAsientos(orden, estadio, listaAsientos);
 
             if (disponibilidad == null)

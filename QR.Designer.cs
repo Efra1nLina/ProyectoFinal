@@ -34,6 +34,7 @@
             imprimirAsiento = new Label();
             imprimirNumero = new Label();
             imprimirFecha = new Label();
+            labelBeneficios = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -93,11 +94,21 @@
             imprimirFecha.TabIndex = 5;
             imprimirFecha.Text = ":)";
             // 
+            // labelBeneficios
+            // 
+            labelBeneficios.AutoSize = true;
+            labelBeneficios.Location = new Point(25, 174);
+            labelBeneficios.Name = "labelBeneficios";
+            labelBeneficios.Size = new Size(14, 15);
+            labelBeneficios.TabIndex = 6;
+            labelBeneficios.Text = ":)";
+            // 
             // QR
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(548, 198);
+            Controls.Add(labelBeneficios);
             Controls.Add(imprimirFecha);
             Controls.Add(imprimirNumero);
             Controls.Add(imprimirAsiento);
@@ -120,5 +131,6 @@
         private Label imprimirAsiento;
         private Label imprimirNumero;
         private Label imprimirFecha;
+        private Label labelBeneficios;
     }
 }

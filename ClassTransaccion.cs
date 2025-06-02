@@ -22,6 +22,7 @@ namespace ProyectoFinal
         {
             List<ClassBoleto> boletosGenerados = new List<ClassBoleto>();
             int indexAsiento = 0;
+            
 
             while (!orden.EstaVacia() && indexAsiento < listaAsientos.Count)
             {
@@ -39,15 +40,19 @@ namespace ProyectoFinal
                         {
                             int asientoAsignado = listaAsientos[indexAsiento];
                             ClassBoleto boleto;
+                            
 
-                            if (cliente.ZonaDeseada == "VIP")
+                            if (cliente.ZonaDeseada.Equals("VIP", StringComparison.OrdinalIgnoreCase))
                             {
+                                
                                 boleto = new ClassBoletoVIP(contadorBoletos, cliente.ZonaDeseada, asientoAsignado, cliente.Nombre);
                             }
                             else
                             {
+                                
                                 boleto = new ClassBoleto(contadorBoletos, cliente.ZonaDeseada, asientoAsignado, cliente.Nombre);
                             }
+
 
                             GuardarTransaccionYGenerarQR(boleto);
 
@@ -66,25 +71,41 @@ namespace ProyectoFinal
 
         private void GuardarTransaccionYGenerarQR(ClassBoleto boleto)
         {
-            
+
+            MessageBox.Show("Entrando a GuardarTransaccionYGenerarQR");
+
             if (!Directory.Exists(carpeta))
             {
                 Directory.CreateDirectory(carpeta);
             }
-            using (StreamWriter sw = new StreamWriter(rutaArchivo, true))
+            string contenidoQR = $"Boleto #{boleto.Numero}\nZona: {boleto.Zona}\nAsiento: {boleto.Asiento}\nCliente: {boleto.NombreComprador}";
+            try
             {
-                sw.WriteLine($"{boleto.Numero};{boleto.NombreComprador};{boleto.Zona};{boleto.Asiento};{boleto.FechaHoraCompra}");
+                using (StreamWriter sw = new StreamWriter(rutaArchivo, true))
+                {
+                    if (boleto is ClassBoletoVIP vip)
+                    {
+                        sw.WriteLine($"{vip.Numero};{vip.NombreComprador};{vip.Zona};{vip.Asiento};{vip.FechaHoraCompra};{vip.Beneficios}");
+                    }
+                    else
+                    {
+                        sw.WriteLine($"{boleto.Numero};{boleto.NombreComprador};{boleto.Zona};{boleto.Asiento};{boleto.FechaHoraCompra}");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al guardar el archivo: " + ex.Message);
             }
 
             //Para el QR
-            string contenidoQR = $"Boleto #{boleto.Numero}\nZona: {boleto.Zona}\nAsiento: {boleto.Asiento}\nCliente: {boleto.NombreComprador}";
+
             string rutaImagen = Path.Combine(carpeta, $"QR_{boleto.Numero}.png");
 
             QRCodeGenerator qrGenerator = new QRCodeGenerator();
             QRCodeData qrCodeData = qrGenerator.CreateQrCode(contenidoQR, QRCodeGenerator.ECCLevel.Q);
             QRCode qrCode = new QRCode(qrCodeData);
             Bitmap qrImage = qrCode.GetGraphic(20);
-
             qrImage.Save(rutaImagen, ImageFormat.Png);
         }
 

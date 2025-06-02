@@ -73,5 +73,18 @@ namespace ProyectoFinal
 
             return lista.ToString();
         }
+        public int Contar()
+        {
+            int contador = 0;
+            ClassNodoOrden? actual = frente;
+
+            while (actual != null)
+            {
+                contador++;
+                actual = actual.Siguiente;
+            }
+
+            return contador;
+        }
     }
 }

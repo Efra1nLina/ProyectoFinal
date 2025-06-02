@@ -83,7 +83,7 @@ namespace ProyectoFinal
                                 // Aumentar tickets disponibles y simular asignación
                                 zona.Tickets += devolucion.TicketsDevueltos;
                                 MessageBox.Show($"Cliente {cliente.Nombre} recibió {devolucion.TicketsDevueltos} tickets de la zona {zona.Zona} que fueron cancelados por {devolucion.Cliente}");
-
+                            
                                 Pop(); // Eliminar el nodo de la pila
                                 break;
                             }

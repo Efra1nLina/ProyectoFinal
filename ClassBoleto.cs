@@ -29,4 +29,5 @@ namespace ProyectoFinal
             return $"Boleto #{Numero} | Zona: {Zona} | Asiento: {Asiento} | Comprador: {NombreComprador} | Fecha: {FechaHoraCompra}";
         }
     }
-}
+} 
+                                                                                                
