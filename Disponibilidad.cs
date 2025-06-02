@@ -74,13 +74,13 @@ namespace ProyectoFinal
             int filaBase = 0;
             int contador = 1;
 
-            contador = DibujarZona(g, "VIP", 2, filaBase, new Point(0, 40), ref contador);
+            contador = DibujarZona(g, "VIP", 2, filaBase, new Point(0, 75), ref contador);
             filaBase += 2;
 
-            contador = DibujarZona(g, "Tribuna", 3, filaBase, new Point(0, 160), ref contador);
+            contador = DibujarZona(g, "Tribuna", 3, filaBase, new Point(0, 195), ref contador);
             filaBase += 3;
 
-            contador = DibujarZona(g, "General", 4, filaBase, new Point(0, 340), ref contador);
+            contador = DibujarZona(g, "General", 4, filaBase, new Point(0, 375), ref contador);
 
         }
 
