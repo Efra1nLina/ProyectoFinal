@@ -47,7 +47,7 @@ namespace ProyectoFinal
                 return null;
             }
 
-            ClassNodoOrden eliminado = frente!; //el ! le indica al compilador que frente no es null en este punto (porque ya lo verificaste antes)
+            ClassNodoOrden eliminado = frente!; //el ! le indica al compilador que frente no es null en este punto (porque ya se verifica antes)
             frente = frente!.Siguiente; //si no habia más nodos, frente sera null
 
             if (frente == null)

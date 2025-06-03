@@ -14,7 +14,7 @@ namespace ProyectoFinal
         public static ClassTransaccion Transaccion;
         public static List<bool> listaAsientosOcupados;
         public static int contadorOcupados; 
-        // Constructor estático para inicializar las variables al cargar la clase
+        // Constructor estatico para inicializar las variables al cargar la clase
         static SistemaGlobal()
         {
             Estadio = new ClassEstadio();

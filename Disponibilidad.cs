@@ -48,7 +48,6 @@ namespace ProyectoFinal
                     Rectangle rect = new Rectangle(x, y, ancho, alto);
                     //Para cambiar el color de los asientos ocupados verificando en la lista :D
                     int numeroAsiento = contador - 1;
-                    // Color según ocupación
                     Brush fondoColor = (numeroAsiento >= 0 && numeroAsiento < SistemaGlobal.listaAsientosOcupados.Count && SistemaGlobal.listaAsientosOcupados[numeroAsiento])
                         ? Brushes.Red
                         : Brushes.LightGreen;
@@ -90,7 +89,7 @@ namespace ProyectoFinal
         }
         public void ActualizarDisponibilidad()
         {
-            this.Invalidate(); // Fuerza la actualización de la interfaz
+            this.Invalidate(); // Fuerza la actualizacion de la interfaz
         }
 
         private void label1_Click(object sender, EventArgs e)

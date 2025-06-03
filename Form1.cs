@@ -36,7 +36,7 @@ namespace ProyectoFinal
 
             // Por ejemplo: ventana principal a la izquierda
             ventana.Location = new Point(100, 100); // X = 100, Y = 100
-                                                    // Y la otra a la derecha (ajusta el valor 800 si la ventana es más ancha)
+                                                    // Y la otra a la derecha (ajusta el valor 800 si la ventana es mas ancha)
             ventana2.Location = new Point(ventana.Location.X + ventana.Width + 10, ventana.Location.Y);
 
             // Mostrar ambas
@@ -87,7 +87,7 @@ namespace ProyectoFinal
                     File.Delete(rutaArchivo);
                 }
 
-                // Borrar imágenes QR
+                // Borrar imagenes QR
                 foreach (var archivo in Directory.GetFiles(carpeta, "QR_*.png"))
                 {
                     File.Delete(archivo);
@@ -114,7 +114,7 @@ namespace ProyectoFinal
 
             // Por ejemplo: ventana principal a la izquierda
             ventana.Location = new Point(100, 100); // X = 100, Y = 100
-                                                    // Y la otra a la derecha (ajusta el valor 800 si la ventana es más ancha)
+                                                    // Y la otra a la derecha (ajusta el valor 800 si la ventana es mas ancha)
             ventana2.Location = new Point(ventana.Location.X + ventana.Width + 10, ventana.Location.Y);
 
             // Mostrar ambas

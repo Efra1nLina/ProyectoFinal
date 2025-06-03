@@ -43,7 +43,6 @@ using System.Windows.Forms;
             //para tipo vip
             if (boleto is ClassBoletoVIP vip)
             {
-                // Asegúrate de tener un label en el form para esto
                 labelBeneficios.Text = "Beneficios: " + vip.Beneficios;
                 labelBeneficios.Visible = true;
             }

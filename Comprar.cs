@@ -37,7 +37,7 @@ namespace ProyectoFinal
         {
             nombre = nombreCliente.Text;
             zona = zonaElejida.SelectedItem.ToString();
-            // Validar selección de zona
+            // Validar seleccion de zona
             if (string.IsNullOrEmpty(zona))
             {
                 MessageBox.Show("Por favor seleccione una zona válida.");
@@ -166,7 +166,7 @@ namespace ProyectoFinal
         {
             nombre = nombreCliente.Text;
             zona = zonaElejida.SelectedItem.ToString();
-            // Validar selección de zona
+            // Validar seleccion de zona
             if (string.IsNullOrEmpty(zona))
             {
                 MessageBox.Show("Por favor seleccione una zona válida.");
@@ -220,7 +220,7 @@ namespace ProyectoFinal
                     return;
                 }
 
-                // Validar si el asiento ya está ocupado
+                // Validar si el asiento ya esta ocupado
                 if (SistemaGlobal.listaAsientosOcupados[asientoNum - 1])
                 {
                     MessageBox.Show($"El asiento {asientoNum} ya está ocupado.");
