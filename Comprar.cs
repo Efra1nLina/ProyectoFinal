@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
+using System.IO.Ports;
 using static System.Windows.Forms.DataFormats;
 
 namespace ProyectoFinal
@@ -162,7 +164,7 @@ namespace ProyectoFinal
             }
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private async void pictureBox1_Click(object sender, EventArgs e)
         {
             nombre = nombreCliente.Text;
             zona = zonaElejida.SelectedItem.ToString();
@@ -258,6 +260,9 @@ namespace ProyectoFinal
                 QR vistaQR = new QR(boleto, rutaQR);
                 vistaQR.Show();
             }
+
+            var senderObj = new ClassArduino();
+            await senderObj.EnviarTransaccionesAsync(); 
         }
     }
 }
