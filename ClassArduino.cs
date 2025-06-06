@@ -16,7 +16,7 @@ namespace ProyectoFinal
         private readonly int baudRate;
         private SerialPort serialPort;
 
-        public ClassArduino(string archivoRuta = @"C:\estadio\transacciones.txt", string puerto = "COM3", int baudRate = 9600)
+        public ClassArduino(string archivoRuta = @"C:\estadio\transacciones.txt", string puerto = "COM5", int baudRate = 9600)
         {
             this.archivoRuta = archivoRuta;
             this.puerto = puerto;
@@ -36,8 +36,6 @@ namespace ProyectoFinal
             try
             {
                 serialPort = new SerialPort(puerto, baudRate);
-                serialPort.ReadTimeout = 5000;
-                serialPort.WriteTimeout = 2000;
                 serialPort.Open();
 
                 foreach (string linea in lineas)
@@ -45,17 +43,22 @@ namespace ProyectoFinal
                     if (string.IsNullOrWhiteSpace(linea)) continue;
 
                     serialPort.WriteLine(linea);
-                    MessageBox.Show($"Se envió:\n{linea}\n\nAcerca una tarjeta RFID.", "Esperando...", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    string respuesta = serialPort.ReadLine().Trim();
 
-                    string respuesta = serialPort.ReadLine();
-                    MessageBox.Show($"Arduino respondió:\n{respuesta}", "Confirmación", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (respuesta != "OK")
+                    {
+                        MessageBox.Show($"Error desde Arduino: {respuesta}");
+                        return;
+                    }
                 }
 
-                MessageBox.Show("Todas las transacciones fueron enviadas.", "Listo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                // Señal para indicar que se terminó de enviar
+                serialPort.WriteLine("FIN");
+                MessageBox.Show("Tickets enviados. Coloca tarjeta RFID.");
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error en la comunicación serial: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error en comunicación serial: {ex.Message}");
             }
             finally
             {
@@ -63,6 +66,7 @@ namespace ProyectoFinal
                     serialPort.Close();
             }
         }
+
 
     }
 }
