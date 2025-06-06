@@ -9,64 +9,77 @@ using System.Windows.Forms;
 
 namespace ProyectoFinal
 {
-    class ClassArduino
+    public class ClassArduino
     {
-        private readonly string archivoRuta;
-        private readonly string puerto;
-        private readonly int baudRate;
-        private SerialPort serialPort;
+        private readonly string rutaArchivo = @"C:\estadio\transacciones.txt";
+        private readonly SerialPort puertoSerie;
 
-        public ClassArduino(string archivoRuta = @"C:\estadio\transacciones.txt", string puerto = "COM5", int baudRate = 9600)
+        public ClassArduino()
         {
-            this.archivoRuta = archivoRuta;
-            this.puerto = puerto;
-            this.baudRate = baudRate;
+            puertoSerie = new SerialPort("COM3", 9600, Parity.None, 8, StopBits.One)
+            {
+                Handshake = Handshake.None,
+                ReadTimeout = 500,
+                WriteTimeout = 500
+            };
         }
 
-        public async Task EnviarTransaccionesAsync()
+        public void EnviarDatos()
         {
-            if (!File.Exists(archivoRuta))
-            {
-                MessageBox.Show("No se encontró el archivo de transacciones.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            string[] lineas = File.ReadAllLines(archivoRuta);
-
             try
             {
-                serialPort = new SerialPort(puerto, baudRate);
-                serialPort.Open();
+                // ▶ Abrimos el puerto serie
+                if (!puertoSerie.IsOpen)
+                    puertoSerie.Open();
+
+                // ▶ Verificamos que el archivo exista
+                if (!File.Exists(rutaArchivo))
+                {
+                    MessageBox.Show("No se encontró el archivo de transacciones.", "Archivo no encontrado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                string[] lineas = File.ReadAllLines(rutaArchivo);
+                if (lineas.Length == 0)
+                {
+                    MessageBox.Show("El archivo de transacciones está vacío.", "Archivo vacío", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // ▶ Leemos zona de la primera línea
+                string[] camposPrimera = lineas[0].Split(';');
+                if (camposPrimera.Length < 3)
+                {
+                    MessageBox.Show("La estructura de la primera línea es inválida.", "Error de formato", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                string zonaObjetivo = camposPrimera[2].Trim();
+                int contador = 0;
 
                 foreach (string linea in lineas)
                 {
-                    if (string.IsNullOrWhiteSpace(linea)) continue;
-
-                    serialPort.WriteLine(linea);
-                    string respuesta = serialPort.ReadLine().Trim();
-
-                    if (respuesta != "OK")
+                    string[] campos = linea.Split(';');
+                    if (campos.Length >= 3 && campos[2].Trim().Equals(zonaObjetivo, StringComparison.OrdinalIgnoreCase))
                     {
-                        MessageBox.Show($"Error desde Arduino: {respuesta}");
-                        return;
+                        contador++;
                     }
                 }
 
-                // Señal para indicar que se terminó de enviar
-                serialPort.WriteLine("FIN");
-                MessageBox.Show("Tickets enviados. Coloca tarjeta RFID.");
+                string mensaje = $"{zonaObjetivo.ToUpper()}: {contador}";
+                puertoSerie.WriteLine(mensaje);
+
+                MessageBox.Show($"Datos enviados correctamente a Arduino:\n\n\"{mensaje}\"", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error en comunicación serial: {ex.Message}");
+                MessageBox.Show($"Ocurrió un error al enviar los datos a Arduino:\n{ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
-                if (serialPort != null && serialPort.IsOpen)
-                    serialPort.Close();
+                if (puertoSerie.IsOpen)
+                    puertoSerie.Close();
             }
         }
-
-
-    }
+    }   
 }

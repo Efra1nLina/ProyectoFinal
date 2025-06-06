@@ -261,8 +261,8 @@ namespace ProyectoFinal
                 vistaQR.Show();
             }
 
-            var senderObj = new ClassArduino();
-            await senderObj.EnviarTransaccionesAsync(); 
+            ClassArduino arduino = new ClassArduino();
+            arduino.EnviarDatos();
         }
     }
 }
